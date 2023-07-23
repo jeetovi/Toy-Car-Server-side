@@ -1,0 +1,38 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "src/index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/endpoint",
+        "dest": "src/api/endpoint.js"
+      },
+      {
+        "src": "/blog/:slug",
+        "dest": "src/blog/post.js"
+      },
+      {
+        "src": "/blog",
+        "dest": "src/blog/index.js"
+      },
+      {
+        "src": "/:path*",
+        "dest": "src/404.js"
+      }
+    ],
+    "env": {
+      "API_KEY": "your-api-key",
+      "DEBUG_MODE": "true"
+    },
+    "alias": {
+      "example.com": "your-vercel-project.vercel.app"
+    },
+    "public": true,
+    "regions": ["us-east1", "europe-west1"],
+    "error": "src/error.js"
+  }
+  
