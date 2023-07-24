@@ -28,7 +28,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    client.connect();
+ await  client.connect();
 
     // Find coloction
     const serviceCollection = client.db('Toy-Car').collection("services");
@@ -45,6 +45,21 @@ async function run() {
         const result = await serviceCollection.findOne(quary);
         res.send(result)
     })
+    const serviceCollectiontow = client.db('Toy-Car').collection("CarData");
+    app.get('/CarData', async(req,res) =>{
+        const cursor = serviceCollection.find();
+        const result = await cursor.toArray()
+        res.send(result)
+    })
+    // chackOUt sections 
+    app.get('/CarData/:id', async(req,res) =>{
+        const id = req.params.id;
+        const quary = {_id: new ObjectId(id)}
+      
+        const result = await serviceCollectiontow.findOne(quary);
+        res.send(result)
+    })
+  
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
