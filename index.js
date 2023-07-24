@@ -37,7 +37,7 @@ async function run() {
         const result = await cursor.toArray()
         res.send(result)
     })
-    // chackOUt sections number one 
+    // chackOUt sections 
     app.get('/services/:id', async(req,res) =>{
         const id = req.params.id;
         const quary = {_id: new ObjectId(id)}
@@ -45,8 +45,21 @@ async function run() {
         const result = await serviceCollection.findOne(quary);
         res.send(result)
     })
-  
-  
+
+    const serviceCollectiontwo = client.db('Toy-Car').collection("services");
+    app.get('/services', async(req,res) =>{
+        const cursor = serviceCollection.find();
+        const result = await cursor.toArray()
+        res.send(result)
+    })
+    // chackOUt
+    app.get('/services/:id', async(req,res) =>{
+        const id = req.params.id;
+        const quary = {_id: new ObjectId(id)}
+      
+        const result = await serviceCollectiontwo.findOne(quary);
+        res.send(result)
+    })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
