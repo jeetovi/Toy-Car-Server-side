@@ -37,7 +37,7 @@ async function run() {
         const result = await cursor.toArray()
         res.send(result)
     })
-    // chackOUt sections 
+    // chackOUt sections number one 
     app.get('/services/:id', async(req,res) =>{
         const id = req.params.id;
         const quary = {_id: new ObjectId(id)}
